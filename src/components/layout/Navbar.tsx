@@ -3,35 +3,38 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { NeonButton } from "@/components/common/NeonButton";
 import { CartToggle } from "@/components/cart/CartToggle";
+import { ThemeToggle } from "@/components/common/ThemeToggle";
 
 export function Navbar() {
   const pathname = usePathname();
   
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-bg-void/80 backdrop-blur-md">
+    <nav className="sticky top-0 z-50 w-full bg-background/50 backdrop-blur-2xl shadow-sm transition-all duration-300">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
         <Link href="/" className="flex items-center space-x-2">
-          <span className="font-orbitron text-xl font-bold text-neon-cyan tracking-wider drop-shadow-[0_0_8px_rgba(0,245,255,0.8)]">
-            AntiGravity
+          <span className="font-heading text-2xl font-black text-primary tracking-widest">
+            EbOOk
           </span>
         </Link>
-        <div className="hidden md:flex items-center space-x-6">
-          <Link href="/browse" className={cn("text-sm transition-colors hover:text-neon-cyan font-semibold tracking-wide", pathname.startsWith("/browse") ? "text-neon-cyan" : "text-text-muted")}>Browse</Link>
-          <Link href="/sell" className={cn("text-sm transition-colors hover:text-neon-purple font-semibold tracking-wide", pathname.startsWith("/sell") ? "text-neon-purple" : "text-text-muted")}>Sell</Link>
+        <div className="hidden lg:flex items-center space-x-6">
+          <Link href="/about" className={cn("text-sm transition-colors hover:text-primary font-semibold tracking-wide", pathname.startsWith("/about") ? "text-primary" : "text-muted-foreground")}>About Us</Link>
+          <Link href="/browse" className={cn("text-sm transition-colors hover:text-primary font-semibold tracking-wide", pathname.startsWith("/browse") ? "text-primary" : "text-muted-foreground")}>Browse Library</Link>
+          <Link href="/sell" className={cn("text-sm transition-colors hover:text-primary font-semibold tracking-wide", pathname.startsWith("/sell") ? "text-primary" : "text-muted-foreground")}>Become a Seller</Link>
+          <Link href="/browse" className="text-sm transition-colors hover:text-primary font-semibold tracking-wide text-muted-foreground">Categories</Link>
         </div>
         <div className="flex items-center space-x-4">
+          <ThemeToggle />
           <CartToggle />
           <Link href="/login">
-            <NeonButton variant="ghost" className="hidden sm:inline-flex text-white hover:text-neon-cyan hover:bg-transparent" neonVariant="primary">
+            <button className="hidden sm:inline-flex px-4 py-2 rounded-md text-sm font-medium transition-all hover:bg-background/60 bg-transparent text-foreground border-none hover:shadow-sm">
               Login
-            </NeonButton>
+            </button>
           </Link>
           <Link href="/register">
-            <NeonButton neonVariant="primary">
+            <button className="px-5 py-2 rounded-md bg-background/50 backdrop-blur-md text-foreground text-sm font-semibold hover:bg-background/80 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.05)] border-none">
               Enlist
-            </NeonButton>
+            </button>
           </Link>
         </div>
       </div>

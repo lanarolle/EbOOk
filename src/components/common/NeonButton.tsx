@@ -16,13 +16,13 @@ export const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>(
         <Button
           ref={ref}
           className={cn(
-            "relative transition-all duration-300 font-bold tracking-wide uppercase font-orbitron",
+            "relative transition-all duration-300 font-headingld tracking-wide rounded-md",
             {
-              "bg-neon-cyan/10 text-neon-cyan border border-neon-cyan hover:bg-neon-cyan/20 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)]":
+              "bg-primary text-primary-foreground hover:bg-primary/90 shadow":
                 neonVariant === "primary",
-              "bg-neon-gold/10 text-neon-gold border border-neon-gold hover:bg-neon-gold/20 hover:shadow-[0_0_15px_rgba(255,215,0,0.5)]":
+              "bg-accent text-accent-foreground hover:bg-accent/90 shadow-md ring-1 ring-accent/20":
                 neonVariant === "cta",
-              "bg-neon-purple/10 text-neon-purple border border-neon-purple hover:bg-neon-purple/20 hover:shadow-[0_0_15px_rgba(191,0,255,0.5)]":
+              "bg-transparent border border-input text-foreground hover:bg-accent hover:text-accent-foreground":
                 neonVariant === "outline",
             },
             className

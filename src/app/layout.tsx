@@ -1,26 +1,22 @@
 import type { Metadata } from "next";
-import { Orbitron, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AnimatedBackground } from "@/components/common/AnimatedBackground";
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "AntiGravity | Read Beyond Gravity",
-  description: "A futuristic eBook marketplace where freelancers buy and sell digital books.",
+  title: "EbOOk | Modern Digital Marketplace",
+  description: "A premium digital marketplace for eBooks and manuscripts.",
 };
 
 export default function RootLayout({
@@ -31,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${dmSans.variable} ${orbitron.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${inter.variable} ${playfair.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -39,6 +35,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
+          <AnimatedBackground />
           {children}
         </ThemeProvider>
       </body>

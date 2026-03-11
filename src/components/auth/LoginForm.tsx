@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useAuth } from "@/lib/hooks/useAuth";
-import { NeonButton } from "@/components/common/NeonButton";
 import { GlassCard } from "@/components/common/GlassCard";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,36 +33,36 @@ export function LoginForm() {
   return (
     <GlassCard className="w-full max-w-md p-8">
       <div className="flex flex-col space-y-2 text-center mb-8">
-        <h1 className="text-3xl font-bold font-orbitron tracking-tighter text-neon-cyan drop-shadow-[0_0_10px_rgba(0,245,255,0.8)]">
+        <h1 className="text-3xl font-black font-heading tracking-tight text-primary">
           Welcome Back
         </h1>
-        <p className="text-sm text-text-muted">
-          Enter your terminal credentials to access AntiGravity
+        <p className="text-sm text-muted-foreground">
+          Enter your terminal credentials to access EbOOk
         </p>
       </div>
 
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="space-y-2">
-          <Label htmlFor="email" className="text-text-primary">Email</Label>
+        <div className="space-y-2 text-left">
+          <Label htmlFor="email" className="text-foreground">Email</Label>
           <Input
             id="email"
             type="email"
-            placeholder="pilot@starship.com"
+            placeholder="reader@ebook.com"
             disabled={isLoading}
-            className="bg-bg-void border-white/10 text-white focus-visible:ring-neon-cyan"
+            className="bg-background border-input text-foreground focus-visible:ring-primary"
             {...form.register("email")}
           />
           {form.formState.errors.email && (
-            <p className="text-sm text-red-500">{form.formState.errors.email.message}</p>
+            <p className="text-sm text-destructive">{form.formState.errors.email.message}</p>
           )}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 text-left">
           <div className="flex items-center justify-between">
-            <Label htmlFor="password" className="text-text-primary">Password</Label>
+            <Label htmlFor="password" className="text-foreground">Password</Label>
             <Link
               href="/forgot-password"
-              className="text-xs text-neon-cyan hover:underline"
+              className="text-xs text-primary hover:underline hover:text-primary/80"
             >
               Forgot password?
             </Link>
@@ -72,31 +71,30 @@ export function LoginForm() {
             id="password"
             type="password"
             disabled={isLoading}
-            className="bg-bg-void border-white/10 text-white focus-visible:ring-neon-cyan"
+            className="bg-background border-input text-foreground focus-visible:ring-primary"
             {...form.register("password")}
           />
           {form.formState.errors.password && (
-            <p className="text-sm text-red-500">{form.formState.errors.password.message}</p>
+            <p className="text-sm text-destructive">{form.formState.errors.password.message}</p>
           )}
         </div>
 
-        {error && <p className="text-sm text-red-500 text-center">{error}</p>}
+        {error && <p className="text-sm text-destructive text-center">{error}</p>}
 
-        <NeonButton
+        <button
           type="submit"
           disabled={isLoading}
-          className="w-full mt-4"
-          neonVariant="primary"
+          className="w-full mt-4 flex justify-center items-center px-5 py-3 rounded-md bg-background/50 backdrop-blur-md text-foreground text-sm font-semibold hover:bg-background/80 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.05)] border-none disabled:opacity-50"
         >
           {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Initialize Session
-        </NeonButton>
+        </button>
       </form>
 
-      <div className="mt-6 text-center text-sm text-text-muted">
-        New pilot?{" "}
-        <Link href="/register" className="text-neon-purple hover:underline">
-          Register for clearance
+      <div className="mt-6 text-center text-sm text-muted-foreground">
+        New to EbOOk?{" "}
+        <Link href="/register" className="text-primary hover:underline font-medium">
+          Create an account
         </Link>
       </div>
     </GlassCard>

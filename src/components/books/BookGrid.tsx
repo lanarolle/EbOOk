@@ -8,12 +8,12 @@ interface BookGridProps {
 export function BookGrid({ books }: BookGridProps) {
   if (!books?.length) {
     return (
-      <div className="w-full flex flex-col items-center justify-center py-32 text-center bg-bg-surface/30 border border-white/5 rounded-2xl backdrop-blur-sm">
-        <div className="w-16 h-16 rounded-full bg-bg-void flex items-center justify-center mb-4 shadow-[inset_0_0_15px_rgba(0,0,0,0.8)] border border-white/5">
-          <span className="text-neon-purple font-black text-2xl font-orbitron">0</span>
+      <div className="w-full flex flex-col items-center justify-center py-32 text-center bg-background/40 border-none rounded-2xl backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
+        <div className="w-16 h-16 rounded-full bg-background/50 flex items-center justify-center mb-4 shadow-[inset_0_2px_10px_rgba(0,0,0,0.1)] border-none">
+          <span className="text-primary font-black text-2xl font-heading">0</span>
         </div>
-        <p className="text-xl text-text-muted font-orbitron tracking-widest uppercase">No protocols found</p>
-        <p className="text-sm text-text-muted mt-2">Adjust your sub-space frequencies to locate more results.</p>
+        <p className="text-xl text-muted-foreground font-heading tracking-widest uppercase">No books found</p>
+        <p className="text-sm text-muted-foreground mt-2">Adjust your filters to locate more results.</p>
       </div>
     );
   }
