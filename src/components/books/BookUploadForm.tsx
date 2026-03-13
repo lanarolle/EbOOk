@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Upload, FileText, PlusCircle, Link as LinkIcon, AlertCircle, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 const bookUploadSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters"),
@@ -29,15 +31,72 @@ export function BookUploadForm() {
     defaultValues: { title: "", description: "", price: "", category: "Sci-Fi", language: "English" },
   });
 
+  const router = useRouter();
+  const supabase = createClient();
+
   const onSubmit = async (data: BookUploadFormValues) => {
     setIsSubmitting(true);
-    // Mock upload logic
-    await new Promise(res => setTimeout(res, 2000));
-    setIsSubmitting(false);
-    alert("Protocol transmission successful! Your manuscript is now live.");
-    form.reset();
-    setPdfFile(null);
-    setCoverFile(null);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Authentication required");
+      
+      if (user.user_metadata?.role !== 'admin') {
+        throw new Error("Only admin class users can initialize new transmissions");
+      }
+
+      let coverUrl = "";
+      if (coverFile) {
+        const fileExt = coverFile.name.split('.').pop();
+        const fileName = `${Math.random().toString(36).substring(2, 10)}.${fileExt}`;
+        const filePath = `${user.id}/${fileName}`;
+        const { error: uploadError } = await supabase.storage.from('covers').upload(filePath, coverFile);
+        if (uploadError) throw uploadError;
+        const { data: publicData } = supabase.storage.from('covers').getPublicUrl(filePath);
+        coverUrl = publicData.publicUrl;
+      }
+
+      let pdfUrl = "";
+      if (pdfFile) {
+        const fileExt = pdfFile.name.split('.').pop();
+        const fileName = `${Math.random().toString(36).substring(2, 10)}.${fileExt}`;
+        const filePath = `${user.id}/${fileName}`;
+        const { error: uploadError } = await supabase.storage.from('books').upload(filePath, pdfFile);
+        if (uploadError) throw uploadError;
+        const { data: publicData } = supabase.storage.from('books').getPublicUrl(filePath);
+        pdfUrl = publicData.publicUrl;
+      }
+
+      const slug = data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Math.random().toString(36).substring(2, 6);
+
+      const { error: insertError } = await supabase.from('books').insert({
+        seller_id: user.id,
+        title: data.title,
+        slug: slug,
+        description: data.description,
+        price: parseFloat(data.price),
+        category: data.category,
+        language: data.language,
+        cover_image_url: coverUrl || null,
+        pdf_url: pdfUrl,
+        is_published: true, // Auto-publish for the demo scope
+        is_featured: false
+      });
+
+      if (insertError) throw insertError;
+
+      alert("Protocol transmission successful! Your manuscript is now live.");
+      form.reset();
+      setPdfFile(null);
+      setCoverFile(null);
+      router.push('/dashboard');
+      router.refresh();
+
+    } catch (error: any) {
+      console.error(error);
+      alert("Transmission Failure: " + error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: 'pdf' | 'cover') => {

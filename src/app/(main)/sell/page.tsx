@@ -5,11 +5,29 @@ import Link from "next/link";
 import Image from "next/image";
 import { Activity, LayoutDashboard, CreditCard, ArrowRight } from "lucide-react";
 
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
+
 export const metadata = {
   title: "Seller Integration | AntiGravity",
 };
 
-export default function SellPage() {
+export default async function SellPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/login");
+  }
+
+  // Restrict to admins
+  if (user.user_metadata?.role !== 'admin') {
+    redirect("/dashboard");
+  }
+
+  // Double check if the user is explicitly set as a buyer. 
+  // For the demo, we might just allow anyone logged in, but we can do a profile check here if strict.
+
   return (
     <div className="container mx-auto px-4 py-12 lg:py-16 min-h-screen">
       
