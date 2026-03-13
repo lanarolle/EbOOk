@@ -37,13 +37,13 @@ export function CartDrawer() {
       <SheetContent className="w-full sm:max-w-md bg-bg-surface/95 backdrop-blur-2xl border-l border-white/10 p-0 flex flex-col shadow-[-20px_0_50px_rgba(0,0,0,0.9)] z-[100]">
         <SheetHeader className="p-6 border-b border-white/10 bg-bg-void/80 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/20 to-transparent pointer-events-none" />
-          <SheetTitle className="font-orbitron tracking-tight text-2xl font-bold flex items-center gap-3 text-white shadow-none relative z-10">
+          <SheetTitle className="font-heading tracking-tight text-2xl font-bold flex items-center gap-3 text-white shadow-none relative z-10">
              <div className="w-10 h-10 rounded-full bg-neon-purple/10 flex items-center justify-center border border-neon-purple/30 shadow-[0_0_15px_rgba(191,0,255,0.4)]">
                 <ShoppingCart className="w-5 h-5 text-neon-purple" />
              </div>
              <div>
                <span>Cargo Bay</span>
-               <span className="text-xs text-text-muted font-mono tracking-widest uppercase block mt-1 font-normal">Active Configuration</span>
+               <span className="text-xs text-text-muted font-sans tracking-widest uppercase block mt-1 font-normal">Active Configuration</span>
              </div>
           </SheetTitle>
         </SheetHeader>
@@ -52,7 +52,7 @@ export function CartDrawer() {
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-[50vh] opacity-60 space-y-4">
               <LayoutGrid className="w-16 h-16 text-text-muted drop-shadow-md" />
-              <p className="text-sm font-orbitron tracking-widest uppercase font-bold text-white">No parameters loaded</p>
+              <p className="text-sm font-heading tracking-widest uppercase font-bold text-white">No parameters loaded</p>
               <p className="text-xs text-text-muted text-center max-w-[200px]">Browse the database and add protocols to your cargo bay.</p>
             </div>
           ) : (
@@ -70,10 +70,10 @@ export function CartDrawer() {
         </div>
 
         <div className="p-6 border-t border-white/10 bg-bg-void shadow-[0_-10px_30px_rgba(0,0,0,0.5)] z-10 relative">
-          <div className="flex justify-between mb-6 font-mono text-lg items-end">
+          <div className="flex justify-between mb-6 font-sans text-lg items-end">
             <span className="text-text-muted uppercase tracking-widest text-xs font-bold leading-none mb-1">Total Authorized Credit</span>
             <span className="font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] text-3xl leading-none">
-              ${getCartTotal().toFixed(2)}
+              Rs {getCartTotal().toFixed(2)}
             </span>
           </div>
           <NeonButton 

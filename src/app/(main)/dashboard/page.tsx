@@ -44,6 +44,8 @@ export default async function DashboardPage() {
       is_published: true,
       is_featured: true,
       total_sales: 1540,
+      cover_image_url: "https://images.unsplash.com/photo-1541873676-a18131494184?auto=format&fit=crop&q=80",
+      pdf_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     }
@@ -51,16 +53,16 @@ export default async function DashboardPage() {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <div className="mb-10 border-b border-white/10 pb-6">
-        <h1 className="text-4xl font-black font-orbitron tracking-tighter text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] mb-2">
-          COMMAND CENTER
+      <div className="mb-10 border-b border-border/10 pb-6">
+        <h1 className="text-4xl font-black font-heading tracking-tighter text-foreground drop-shadow-sm mb-2">
+           COMMAND CENTER
         </h1>
-        <p className="text-text-muted">Welcome, Pilot <span className="text-neon-cyan font-mono">{user.email}</span>. Your authenticated assets are ready.</p>
+        <p className="text-muted-foreground">Welcome, <span className="text-primary font-sans">{user.email}</span>. Your authenticated assets are ready.</p>
       </div>
 
       <div className="space-y-6">
-        <h2 className="text-2xl font-orbitron font-bold text-white flex items-center gap-3">
-           <span className="w-1 h-6 bg-neon-cyan shadow-[0_0_10px_rgba(0,245,255,0.8)]"></span>
+        <h2 className="text-2xl font-heading font-bold text-foreground flex items-center gap-3">
+           <span className="w-1.5 h-6 bg-primary shadow-sm"></span>
            Acquired Manuscripts
         </h2>
         

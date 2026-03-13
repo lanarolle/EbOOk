@@ -26,43 +26,43 @@ export function SellerStats() {
     <div className="space-y-8">
       {/* 4-grid stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <GlassCard className="p-6 border-t-2 border-neon-gold">
+        <GlassCard className="p-6 border-none bg-background/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
            <div className="flex justify-between items-start">
              <div>
-                <p className="text-xs text-text-muted font-orbitron tracking-widest uppercase mb-1">Total Revenue</p>
-                <h4 className="text-3xl font-mono font-bold text-neon-gold drop-shadow-[0_0_8px_rgba(255,215,0,0.5)]">$4,150.00</h4>
+                <p className="text-xs text-muted-foreground font-heading tracking-widest uppercase mb-1">Total Revenue</p>
+                <h4 className="text-3xl font-sans font-bold text-primary drop-shadow-sm">$4,150.00</h4>
              </div>
-             <div className="p-2 bg-neon-gold/10 rounded-lg"><DollarSign className="w-5 h-5 text-neon-gold" /></div>
+             <div className="p-2 bg-primary/10 rounded-lg shadow-inner"><DollarSign className="w-5 h-5 text-primary" /></div>
            </div>
         </GlassCard>
         
-        <GlassCard className="p-6 border-t-2 border-neon-cyan">
+        <GlassCard className="p-6 border-none bg-background/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
            <div className="flex justify-between items-start">
              <div>
-                <p className="text-xs text-text-muted font-orbitron tracking-widest uppercase mb-1">Downloads</p>
-                <h4 className="text-3xl font-mono font-bold text-neon-cyan drop-shadow-[0_0_8px_rgba(0,245,255,0.5)]">949</h4>
+                <p className="text-xs text-muted-foreground font-heading tracking-widest uppercase mb-1">Downloads</p>
+                <h4 className="text-3xl font-sans font-bold text-primary drop-shadow-sm">949</h4>
              </div>
-             <div className="p-2 bg-neon-cyan/10 rounded-lg"><Download className="w-5 h-5 text-neon-cyan" /></div>
+             <div className="p-2 bg-primary/10 rounded-lg shadow-inner"><Download className="w-5 h-5 text-primary" /></div>
            </div>
         </GlassCard>
 
-        <GlassCard className="p-6 border-t-2 border-neon-purple">
+        <GlassCard className="p-6 border-none bg-background/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
            <div className="flex justify-between items-start">
              <div>
-                <p className="text-xs text-text-muted font-orbitron tracking-widest uppercase mb-1">Active Protocols</p>
-                <h4 className="text-3xl font-mono font-bold text-neon-purple drop-shadow-[0_0_8px_rgba(191,0,255,0.5)]">14</h4>
+                <p className="text-xs text-muted-foreground font-heading tracking-widest uppercase mb-1">Active Protocols</p>
+                <h4 className="text-3xl font-sans font-bold text-primary drop-shadow-sm">14</h4>
              </div>
-             <div className="p-2 bg-neon-purple/10 rounded-lg"><BookOpen className="w-5 h-5 text-neon-purple" /></div>
+             <div className="p-2 bg-primary/10 rounded-lg shadow-inner"><BookOpen className="w-5 h-5 text-primary" /></div>
            </div>
         </GlassCard>
 
-        <GlassCard className="p-6 border-t-2 border-white/50">
+        <GlassCard className="p-6 border-none bg-background/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
            <div className="flex justify-between items-start">
              <div>
-                <p className="text-xs text-text-muted font-orbitron tracking-widest uppercase mb-1">Avg Trajectory</p>
-                <h4 className="text-3xl font-mono font-bold text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">+24%</h4>
+                <p className="text-xs text-muted-foreground font-heading tracking-widest uppercase mb-1">Avg Trajectory</p>
+                <h4 className="text-3xl font-sans font-bold text-foreground drop-shadow-sm">+24%</h4>
              </div>
-             <div className="p-2 bg-white/10 rounded-lg"><Activity className="w-5 h-5 text-white" /></div>
+             <div className="p-2 bg-primary/10 rounded-lg shadow-inner"><Activity className="w-5 h-5 text-primary" /></div>
            </div>
         </GlassCard>
       </div>
@@ -70,7 +70,7 @@ export function SellerStats() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Revenue Chart */}
         <GlassCard className="p-6 lg:col-span-2">
-           <h3 className="text-xl font-orbitron font-bold text-text-primary mb-6 flex items-center gap-2">
+           <h3 className="text-xl font-heading font-bold text-text-primary mb-6 flex items-center gap-2">
               <span className="w-1.5 h-6 bg-neon-gold shadow-[0_0_10px_rgba(255,215,0,0.8)]"></span>
               7-Day Revenue Telemetry
            </h3>
@@ -95,7 +95,7 @@ export function SellerStats() {
 
         {/* Top Books Chart */}
         <GlassCard className="p-6">
-           <h3 className="text-xl font-orbitron font-bold text-text-primary mb-6 flex items-center gap-2">
+           <h3 className="text-xl font-heading font-bold text-text-primary mb-6 flex items-center gap-2">
               <span className="w-1.5 h-6 bg-neon-cyan shadow-[0_0_10px_rgba(0,245,255,0.8)]"></span>
               Top Downloads
            </h3>

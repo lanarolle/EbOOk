@@ -23,12 +23,12 @@ export function CartItem({ item }: { item: CartItemType }) {
       </div>
 
       <div className="flex flex-col flex-grow truncate space-y-1">
-        <h4 className="font-orbitron font-bold text-sm text-text-primary truncate">{item.book.title}</h4>
-        <p className="text-[10px] text-neon-cyan mt-1 font-mono uppercase tracking-widest bg-neon-cyan/5 border border-neon-cyan/20 inline-block px-1.5 py-0.5 rounded w-max">
+        <h4 className="font-heading font-bold text-sm text-text-primary truncate">{item.book.title}</h4>
+        <p className="text-[10px] text-neon-cyan mt-1 font-sans uppercase tracking-widest bg-neon-cyan/5 border border-neon-cyan/20 inline-block px-1.5 py-0.5 rounded w-max">
           Seller_{item.book.seller_id.substring(0, 5)}
         </p>
-        <div className="mt-auto font-mono text-neon-gold text-sm font-bold drop-shadow-[0_0_5px_rgba(255,215,0,0.4)] pt-1">
-          ${Number(item.book.price).toFixed(2)}
+        <div className="mt-auto font-sans text-neon-gold text-sm font-bold drop-shadow-[0_0_5px_rgba(255,215,0,0.4)] pt-1">
+          Rs {Number(item.book.price).toFixed(2)}
         </div>
       </div>
 
