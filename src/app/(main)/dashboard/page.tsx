@@ -15,41 +15,26 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
-  // Fetch orders and corresponding books
-  // In a real database, we'd query order_items inner join books where buyer_id = user.id
-  // Using direct Supabase queries here for logic reference
-  const { data: orderItems, error } = await supabase
-    .from("order_items")
-    .select(`
-      book_id,
-      books (
-        id, seller_id, title, slug, description, cover_image_url, price, pdf_url
-      )
-    `)
-    .eq('orders.buyer_id', user.id); // This would require a view or double query in standard Supabase without a proper join configuration
-
-  // Mock mapped books for UI visualization
-  const purchasedBooks: Book[] = [
-    {
-      id: "1",
-      seller_id: "s1",
-      title: "Neuromancer Chronicles",
-      slug: "neuromancer",
-      description: "A deep dive into the cyberpunk reality of the next century.",
-      price: 14.99,
-      currency: "USD",
-      category: "Sci-Fi",
-      rating_avg: 4.8,
-      rating_count: 124,
-      is_published: true,
-      is_featured: true,
-      total_sales: 1540,
-      cover_image_url: "https://images.unsplash.com/photo-1541873676-a18131494184?auto=format&fit=crop&q=80",
-      pdf_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
+  // Fetch authentic order history
+  const { data: orders } = await supabase
+    .from("orders")
+    .select("id")
+    .eq('buyer_id', user.id);
+    
+  let purchasedBooks: any[] = [];
+  
+  if (orders && orders.length > 0) {
+    const orderIds = orders.map(o => o.id);
+    const { data: orderItems } = await supabase
+      .from("order_items")
+      .select(`books (*)`)
+      .in('order_id', orderIds);
+      
+    if (orderItems) {
+      // @ts-ignore - Supabase types can occasionally nest joined relationships as arrays depending on schema mapping
+      purchasedBooks = orderItems.map(item => Array.isArray(item.books) ? item.books[0] : item.books).filter(Boolean);
     }
-  ];
+  }
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl">

@@ -3,83 +3,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { Book } from "@/types";
 
-// Mock data for featured books (To be replaced with real Supabase data)
-const FEATURED_BOOKS: Book[] = [
-  {
-    id: "1",
-    seller_id: "s1",
-    title: "Neuromancer Chronicles",
-    slug: "neuromancer-chronicles",
-    description: "A deep dive into the cyberpunk reality of the next century.",
-    price: 1499,
-    currency: "LKR",
-    category: "Sci-Fi",
-    rating_avg: 4.8,
-    is_published: true,
-    is_featured: true,
-    total_sales: 1540,
-    cover_image_url: "https://images.unsplash.com/photo-1535295972055-1c762f4483e5?auto=format&fit=crop&q=80",
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "2",
-    seller_id: "s2",
-    title: "Digital Fortress",
-    slug: "digital-fortress",
-    description: "The ultimate guide to cyberspace security protocols.",
-    price: 2999,
-    currency: "LKR",
-    category: "Technology",
-    rating_avg: 4.9,
-    is_published: true,
-    is_featured: true,
-    total_sales: 890,
-    cover_image_url: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80",
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "3",
-    seller_id: "s3",
-    title: "Zero-G Combat Tactics",
-    slug: "zero-g-combat",
-    description: "Military strategies for low-gravity environments.",
-    price: 1950,
-    currency: "LKR",
-    category: "Action",
-    rating_avg: 4.6,
-    is_published: true,
-    is_featured: true,
-    total_sales: 420,
-    cover_image_url: "https://images.unsplash.com/photo-1541873676-a18131494184?auto=format&fit=crop&q=80",
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "4",
-    seller_id: "s4",
-    title: "Syntax of the Stars",
-    slug: "syntax-stars",
-    description: "Programming languages used by extraterrestrial colonizers.",
-    price: 4999,
-    currency: "LKR",
-    category: "Programming",
-    rating_avg: 5.0,
-    is_published: true,
-    is_featured: true,
-    total_sales: 2100,
-    cover_image_url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80",
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  }
-];
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata = {
   title: "EbOOk | Modern Library",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const supabase = await createClient();
+  const { data: featuredBooks } = await supabase
+    .from('books')
+    .select('*')
+    .eq('is_published', true)
+    .order('created_at', { ascending: false })
+    .limit(4);
+
+  const displayBooks = featuredBooks || [];
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -169,9 +109,15 @@ export default function HomePage() {
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {FEATURED_BOOKS.map((book) => (
-            <BookCard key={book.id} book={book} />
-          ))}
+          {displayBooks.length > 0 ? (
+            displayBooks.map((book) => (
+              <BookCard key={book.id} book={book} />
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12 text-muted-foreground bg-background/50 backdrop-blur-sm rounded-xl border border-dashed border-border/50">
+               No transmissions available in the active database.
+            </div>
+          )}
         </div>
         
         <div className="mt-12 text-center sm:hidden">
